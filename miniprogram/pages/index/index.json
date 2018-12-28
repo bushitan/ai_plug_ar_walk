@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "list": "plugin://myPlugin/list",
+    "ar": "plugin://myPlugin/ar",
     "map-camera": "plugin://myPlugin/camera"
   }
 }

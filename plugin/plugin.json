@@ -1,6 +1,7 @@
 {
     "publicComponents": {
         "list": "components/list/list",
+        "ar": "components/ar/ar",
         "camera":"components/camera/camera"
     },
     "pages": {

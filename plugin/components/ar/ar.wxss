@@ -1,0 +1,17 @@
+@import "../../templates/nav/info.wxss";
+@import "../../templates/nav/normal.wxss";
+@import "../../templates/menu/base.wxss";
+@import "../../templates/map/map.wxss";
+@import "../../templates/mark/mark.wxss";
+@import "../../templates/mark_info/mark_info.wxss";
+
+.camera{
+    position: absolute;
+    width: 100vw;
+    /* height:80vh; */
+}
+
+
+
+
+
