@@ -1,0 +1,8 @@
+<list />
+
+<navigator url="plugin-private://wxb5f4203d6bc1d799/pages/map/map">
+  Go to pages/hello-page!
+</navigator>
+
+
+<map-camera></map-camera>

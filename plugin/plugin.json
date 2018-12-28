@@ -1,0 +1,10 @@
+{
+    "publicComponents": {
+        "list": "components/list/list",
+        "camera":"components/camera/camera"
+    },
+    "pages": {
+        "map": "pages/map/map"
+    },
+    "main": "index.js"
+}
