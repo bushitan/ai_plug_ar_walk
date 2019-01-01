@@ -8,8 +8,7 @@
 
 <!-- TODO
     摄像头，location 为打开的授权提示页面
- -->321321{{show}}
-{{show.menu}}
+ -->
 <camera device-position="back" flash="off"  class="camera" style=' height:{{cameraHeight}}vh;'>
 
     <template is="menu_base" data="{{directionName,keyword}}"  wx:if="{{show.menu}}"/>
