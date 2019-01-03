@@ -35,10 +35,26 @@ Component({
              
             }
         },
+
+        /**模式 */
         mode:{
             type: String,
             value: MODE_MARK,
-        }
+            observer(newVal, oldVal) {}
+        },
+
+        /**下一点 */
+        next: {
+            type: Object,
+            value: {},
+            observer(newVal, oldVal) { }
+        },
+        /**结束点 */
+        end: {
+            type: Object,
+            value: {},
+            observer(newVal, oldVal) { }
+        },
 
 
     },
