@@ -2,10 +2,11 @@
     "publicComponents": {
         "list": "components/list/list",
         "ar": "components/ar/ar",
-        "camera":"components/camera/camera"
+        "camera": "components/camera/camera"
     },
     "pages": {
-        "map": "pages/map/map"
+        "map": "pages/map/map",
+        "test": "pages/test/test"
     },
     "main": "index.js"
 }
