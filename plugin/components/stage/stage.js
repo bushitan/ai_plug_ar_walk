@@ -81,6 +81,10 @@ Component({
              }
         },
 
+        navInfo: {
+            type: Object,
+            value: {},
+        },
 
     },
     data: {

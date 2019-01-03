@@ -19,7 +19,7 @@ Page({
         isSearch:true,
         pointList:[],
         direction:0, //罗盘方向
-        accZ:0, //手机俯仰姿势
+        accZ:0.4, //手机俯仰姿势
 
         focusList:[{
             id: 14573289671493206044,                
@@ -33,7 +33,14 @@ Page({
                 lng	: 113.264359,
             },
             distance: 0,   
-        }]
+        }],
+
+        //导航部分
+        navInfo:{
+            distance: "80",
+            instruction: "这是路口",
+            dialog: "100向右拐",
+        },
     },
 
     /**
@@ -89,8 +96,6 @@ Page({
                     GPSSpeed: res.speed,
                 })
 
-                GP.onInit()
-
             }
         })
     },
@@ -109,7 +114,6 @@ Page({
                 "GPSLocation": GP.data.GPSLocation
             })
         }
-
 
     },
 

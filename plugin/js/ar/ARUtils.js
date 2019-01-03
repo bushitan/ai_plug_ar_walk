@@ -28,8 +28,12 @@ class ARUtils extends ARBase  {
         apiUtils.getMarkList(_keyword, _location.getString(), this.searchCallback)
     }
     searchCallback(res){
+        var _list = GP.addCompassAngle({
+            list: res.data,
+            location: GP.data.GPSLocation,
+        })
         GP.setData({
-            pointList:res.data
+            pointList: _list
         })
     }
 }
