@@ -1,5 +1,5 @@
 {
     "usingComponents": {
-        "ar": "../../components/camera/camera"
+        "stage": "../../components/stage/stage"
     }
 }

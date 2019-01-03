@@ -2,6 +2,8 @@
 
 var Loaction = require("../../js/ar/Location.js")
 var LocationUtils = require("../../js/ar/LocationUtils.js")
+var StageUtils = require("../../js/stage/StageUtils.js")
+var Sprite = require("../../js/stage/Sprite.js")
 Page({
 
     /**
@@ -34,6 +36,13 @@ Page({
         })
 
         console.log(myAngle)
+
+
+        var filter = new StageUtils()
+
+
+        var sprite = new Sprite()
+        console.log(sprite.x)
     },
 
     /**

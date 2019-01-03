@@ -8,7 +8,7 @@
 <map-camera></map-camera> -->
 
 
-<ar></ar>
+<stage></stage>
 <!-- <ar 
     mode="custom"
     keyword="{{keyword}}"

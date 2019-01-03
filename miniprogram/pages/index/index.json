@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "list": "plugin://myPlugin/list",
-    "ar": "plugin://myPlugin/ar",
+    "stage": "plugin://myPlugin/stage",
     "map-camera": "plugin://myPlugin/camera"
   }
 }

@@ -1,6 +1,10 @@
 <!--pages/map/map.wxml-->
-<text>pages/map/map.wxml</text>
+<!-- <text>pages/map/map.wxml</text> -->
 <!-- <camera>
 </camera> -->
 
-<ar></ar>
+<stage
+    list="{{pointList}}"
+    acc_z="{{accZ}}"
+>
+</stage>
