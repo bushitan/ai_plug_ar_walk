@@ -57,7 +57,7 @@ class StagePropertyFilter extends StageBase{
      * @method 过滤marklist数组
      */
     filterMarkList(options = {}) {
-        if (!options.list) {throw Error('list值不能为空')}    
+        if (!options.hasOwnProperty('list')) {throw Error('list值不能为空')}    
         var _list = options.list
         var _list = Utils.getMarkList(_list)
         return _list
