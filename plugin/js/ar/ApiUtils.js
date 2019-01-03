@@ -25,7 +25,6 @@ class ApiUtils {
      *      {string} to_str 结束点经纬度
      */
     getMarkList(key, location_str, callback) {
-        console.log(key, location_str, callback)
         // callback()
         // return 
 

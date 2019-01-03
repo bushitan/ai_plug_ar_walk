@@ -4,7 +4,6 @@
  */
 class StageBase {
     constructor(options) {
-        console.log("base")
         // if (!options.GP) { throw Error('GP值不能为空'); }
     }
 }

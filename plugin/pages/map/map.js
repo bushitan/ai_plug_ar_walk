@@ -18,8 +18,22 @@ Page({
         keyword:"酒店",
         isSearch:true,
         pointList:[],
-        accZ:1
+        direction:0, //罗盘方向
+        accZ:0, //手机俯仰姿势
 
+        focusList:[{
+            id: 14573289671493206044,                
+            title:'广州逸贤居独栋别墅',		
+            address: '广东省广州市越秀区温泉西路二巷13号',
+            tel: 13926116396,		
+            category:'酒店宾馆: 经济型酒店',		
+            type	: 0,		
+            location:{		
+                lat	: 23.12908,		
+                lng	: 113.264359,
+            },
+            distance: 0,   
+        }]
     },
 
     /**
@@ -30,10 +44,26 @@ Page({
         arUtils = new ARUtils({ GP:this })
         setInterval(function(){
             GP.setData({
-                accZ:parseInt(Math.random() * 300)
+                direction:parseInt(Math.random() * 300)
             })
             
         },1000)
+
+        GP.turnOn()
+    },
+
+    turnOn(){
+        wx.onCompassChange(function (res) {
+            GP.setData({
+                direction:res.direction
+            })
+        })
+
+        wx.onAccelerometerChange(function (res) {
+            GP.setData({
+                accZ: res.z
+            })
+        })
     },
 
     /**

@@ -21,16 +21,13 @@ class ARUtils extends ARBase  {
     }
 
     search(options = {}) {
-        console.log(options)
         var _keyword = options.keyword || "车站"
         var _gps_location = options.GPSLocation || { latitue: 23.1290800000, longitude: 113.2643600000 }
         
         var _location = new Location(_gps_location)
-        console.log(_location)
         apiUtils.getMarkList(_keyword, _location.getString(), this.searchCallback)
     }
     searchCallback(res){
-        console.log(res)
         GP.setData({
             pointList:res.data
         })

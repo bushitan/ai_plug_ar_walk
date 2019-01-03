@@ -2,6 +2,11 @@
 var Sprite = require("Sprite.js")
 var GP
 
+const DIRECTION_LEFT = "left" //左方向
+const DIRECTION_RIGHT = "right" //右方向 
+const DIRECTION_FRONT = "front" //正前方
+const DIRECTION_BACK = "back" //后方 
+
 /**
  * @method  开关对象对象
  */
@@ -14,13 +19,92 @@ class MarkUtils {
     /**
      * 渲染mark状态
      */
-    render(options) {
-        var _acc_z = options.acc_z //acc_z做为属性
+    render() {
+        var _direction = GP.data.direction //acc_z做为属性
+        var _acc_z = GP.data.acc_z //acc_z做为属性
         //  var _mark_list = SpriteMark.render({
         //     markList: GP.data.markList,
         //     acc_z: this.acc_z
         // })
-        return []
+        var _mark_list = GP.data.markList
+        _mark_list = this._move(_mark_list)
+        
+        return _mark_list
     }
+
+    /**移动 */
+    _move(mark_list){
+        var _list = mark_list
+        var _d = GP.data.direction
+        var _acc_z = GP.data.acc_z
+        // console.log(_mark_list, _acc_z)
+        for (var i = 0; i < _list.length; i++) {
+            var _m = _list[i]
+            var _x = this._locationToScreen(10,20)
+            _list[i].x = _x
+            _list[i].y = 800
+        }
+        return _list
+    }
+
+    _locationToScreen(phone_value, mark_value) {
+        var _x
+        var baseAngle = 60
+        var screenWidth = 750
+        var halfWidth = screenWidth / 2
+        // var baseStep = halfWidth / baseAngle
+        var baseStep = parseInt(screenWidth / baseAngle)
+        // var halfAngle = baseAngle / 2
+        // var stepPixle = 750 / baseAngle
+
+        var obj = this._compassBetweenAngle(phone_value, mark_value)
+        // console.log(phone_value, mark_value,obj.value)
+        var _value = obj.value
+        if (_value > baseAngle)
+            _x = 1000
+        else {
+            if (obj.direction == DIRECTION_LEFT) {
+
+                _x = halfWidth - baseStep * parseInt(_value)
+            } else {
+                _x = halfWidth + baseStep * parseInt(_value)
+            }
+        }
+        return _x
+    }
+    /**
+     * @method 两个方向的夹角值
+     * @for geo
+     * @param
+     *      {number} phone_value   手机本身的罗盘度数
+     *      {number} mark_value   手机与目标的罗盘度数
+     * @return
+     *      {number} value 夹角度数
+     *      {string} direction 目标在手机的左or右
+     */
+    _compassBetweenAngle(phone_value, mark_value) {
+        var value, direction
+        if (phone_value > mark_value) { //手机 > 目标
+            if (phone_value - mark_value <= 180) {//手机 - 目标 <= 180
+                value = phone_value - mark_value
+                direction = DIRECTION_LEFT
+            } else { //手机 - 目标 > 180
+                value = 359 - phone_value + mark_value
+                direction = DIRECTION_RIGHT
+            }
+        }
+        else {//目标 > 手机
+            if (mark_value - phone_value <= 180) { // 目标 - 手机 <= 180
+                value = mark_value - phone_value
+                direction = DIRECTION_RIGHT
+            } else {// 目标 - 手机 > 180
+                value = 359 - mark_value + phone_value
+                direction = DIRECTION_LEFT
+            }
+        }
+        return { value: value, direction: direction }
+    }
+
+
 }
 module.exports = MarkUtils

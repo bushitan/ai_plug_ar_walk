@@ -5,6 +5,9 @@
 
 <stage
     list="{{pointList}}"
+    direction="{{direction}}"
     acc_z="{{accZ}}"
+    mode="nav"
+    focus="{{focusList}}"
 >
 </stage>

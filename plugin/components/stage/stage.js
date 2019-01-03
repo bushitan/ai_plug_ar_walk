@@ -2,7 +2,8 @@
 
 
 var StageUtils = require("../../js/stage/StageUtils.js")
-var stageUtils 
+var stageUtils
+var GP 
 // var SpriteMark = require("../../js/stage/SpriteMark.js")
 
 var MODE_MARK = "mark"
@@ -19,28 +20,44 @@ Component({
                     })
             }
         },
-        acc_z: {
+        
+        direction: {
             type: Number,
             value: 0,
             observer(newVal, oldVal) {
-                //TODO 校正
+
+                //过滤罗盘方向
+                newVal = stageUtils.filterDirection({
+                    direction: newVal,
+                    acc_z: this.data.acc_z
+                })
+
+                //渲染
                 if (this.data.mode == MODE_MARK) //渲染mark
-                    stageUtils.rendMark({ 
-                        acc_z: newVal,
-                    })
+                    stageUtils.rendMark()
                 else  //渲染导航
-                    stageUtils.rendNav({
-                        acc_z: newVal,
-                    })
-             
+                {
+                    stageUtils.rendNav()
+
+                }
+                return newVal
             }
+        },
+        acc_z: {
+            type: Number,
+            value: 0,
         },
 
         /**模式 */
         mode:{
             type: String,
             value: MODE_MARK,
-            observer(newVal, oldVal) {}
+            observer(newVal, oldVal) {
+                if (newVal == MODE_MARK) //渲染mark
+                    this.setData({ show: stageUtils.setModeMark()})                        
+                else
+                    this.setData({ show: stageUtils.setModeNav() })
+            }
         },
 
         /**下一点 */
@@ -49,28 +66,27 @@ Component({
             value: {},
             observer(newVal, oldVal) { }
         },
-        /**结束点 */
-        end: {
+
+        /**
+         * 结束点 
+        */
+        focus: {
             type: Object,
             value: {},
-            observer(newVal, oldVal) { }
+            observer(newVal, oldVal) {
+                if (newVal)
+                    this.setData({ //
+                        focusList: stageUtils.filterMarkList({ list: newVal })
+                    })
+             }
         },
 
 
     },
     data: {
-        markList: [],
-        show: {
-            menu: true,
-            navInfo: !true,
-            navIcon: !true,
-            navMark: !true,
-            mark: true,
-            markInfo: !true,
-            map: !true,
-            mapIcon: !true,
-            mapCamera: !true,
-        },
+        markList: [], //mark数组
+        focusList:[], //终点数组
+        show: {},
 
         keywordValue: "",
 
@@ -100,24 +116,26 @@ Component({
         // ],
 
     },
-    ready(){
+    ready() {
+        GP = this
         stageUtils = new StageUtils({GP:this})
+        stageUtils.setModeMark()
     },
-    attached: function(){
-        // 可以在这里发起网络请求获取插件的数据
-        // this.setData({
-        //     list: [{
-        //     name: '电视',
-        //     price: 1000
-        //     }, {
-        //     name: '电脑',
-        //     price: 4000
-        //     }, {
-        //     name: '手机',
-        //     price: 3000
-        //     }]
-        // })
-    },
+    // attached: function(){
+    //     // 可以在这里发起网络请求获取插件的数据
+    //     // this.setData({
+    //     //     list: [{
+    //     //     name: '电视',
+    //     //     price: 1000
+    //     //     }, {
+    //     //     name: '电脑',
+    //     //     price: 4000
+    //     //     }, {
+    //     //     name: '手机',
+    //     //     price: 3000
+    //     //     }]
+    //     // })
+    // },
     method:{
         // render(options){
         //     var _acc_z = options.acc_z

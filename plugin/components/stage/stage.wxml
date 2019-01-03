@@ -20,7 +20,7 @@
         wx:if="{{show.navIcon}}"  />
 
     <!-- 导航的mark -->
-    <template is="mark" data="{{markList:nav.currentStep}}" wx:if="{{show.navIcon}}"/>
+    <template is="mark" data="{{markList:nav.focusList}}" wx:if="{{show.navIcon}}"/>
 
     <template is="mark" data="{{markList}}" wx:if="{{show.mark}}"/>
 

@@ -1,9 +1,9 @@
 
-var StageClick = require("StagePropertyFilter.js")
+var StageClick = require("StageClick.js")
 var MarkUtils = require("MarkUtils.js")
 var markUtils 
 var NavUtils = require("NavUtils.js")
-var navUtils 
+var navUtils
 
 var GP
 /**
@@ -14,6 +14,7 @@ class StageUtils extends StageClick {
         super(options)
         if (!options.GP) { throw Error('GP值不能为空'); }
         GP = options.GP
+        this.GP = options.GP
         markUtils = new MarkUtils({ GP: GP })
         navUtils = new NavUtils({ GP: GP })
     }    
@@ -32,10 +33,12 @@ class StageUtils extends StageClick {
      */
     rendNav(options) {
         var _nav = navUtils.render(options)
+        console.log(_nav)
         GP.setData({
             nav: _nav
         })
     }
+
 
 }
 module.exports = StageUtils
