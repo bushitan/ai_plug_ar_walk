@@ -3,7 +3,7 @@ var ARRoute = require("ARRoute.js")
 
 var ApiUtils = require("ApiUtils.js")
 var LocationUtils = require("LocationUtils.js")
-var locationUtils = new LocationUtils()
+// var locationUtils = new LocationUtils()
 var Location = require("Location.js")
 var apiUtils = new ApiUtils()
 
@@ -20,6 +20,7 @@ class ARUtils extends ARRoute  {
 
         GP = options.GP
         that = this
+        this.locationUtils = new LocationUtils()
     }
 
     search(options = {}) {
@@ -30,7 +31,7 @@ class ARUtils extends ARRoute  {
         apiUtils.getMarkList(_keyword, _location.getString(), this._searchCallback)
     }
     _searchCallback(res){
-        var _list = locationUtils.formatSearch({
+        var _list = that.locationUtils.formatSearch({
             list: res.data,
             location: GP.data.GPSLocation,
         })
@@ -61,12 +62,11 @@ class ARUtils extends ARRoute  {
     */
     _navRouteCallback(route) {
         var _route = route
-        _route = locationUtils.formatRoute({
+        _route = that.locationUtils.formatRoute({
             route: _route
         })
         console.log(this,"this")
-        that._setRoute()
-
+        that.startRoute({ route: _route})
     }
 }
 

@@ -62,7 +62,7 @@ Component({
         },
 
         /**下一点 */
-        next: {
+        step: {
             type: Object,
             value: {},
             observer(newVal, oldVal) { }
@@ -139,5 +139,17 @@ Component({
             var _mark_id = e.currentTarget.dataset.mark_id
             this.triggerEvent('startNav', _mark_id);
         },
+        /**
+           * @method 关闭导航
+           * @for template/mark_info/mark_info.wxml
+           * @param
+           *      {object} e 事件对象
+           */
+        clickNavCancel(e) {
+            // var _mark_id = e.currentTarget.dataset.mark_id
+            this.triggerEvent('closeNav');
+            stageUtils.clickNavCancel()
+        },
+        
     },
 })

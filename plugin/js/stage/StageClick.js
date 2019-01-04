@@ -58,6 +58,20 @@ class StageClick extends StagePropertyFilter {
 
 
     /**
+     * @method 关闭mark详情
+     */
+    clickNavCancel() {
+        var s = new SwitchUtils()
+        GP.setData({
+            show: s.onMark(),
+        })
+    }
+
+
+
+
+
+    /**
      * 设置mark模式
      */
     setModeMark() { 

@@ -8,9 +8,11 @@
     list="{{pointList}}"
     direction="{{direction}}"
     acc_z="{{accZ}}"
-    mode="mark"
+    mode="{{mode}}"
+    step="{{step}}"
     focus="{{focusList}}"
     navInfo="{{navInfo}}"
     catch:startNav="startNav"
+    catch:closeNav="closeNav"
 >
 </stage>

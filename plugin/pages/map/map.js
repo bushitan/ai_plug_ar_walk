@@ -40,6 +40,8 @@ Page({
             instruction: "这是路口",
             dialog: "100向右拐",
         },
+
+        mode:"mark"
     },
 
     /**
@@ -52,7 +54,7 @@ Page({
             GP.setData({
                 direction:parseInt(Math.random() * 300)
             })
-            arUtils.checkNav()
+            arUtils.renderRoute()
         },1000)
 
         GP.turnOn()
@@ -124,6 +126,14 @@ Page({
         var _mark_id = e.detail
         arUtils.setNavRoute({markID:_mark_id})
         
+    },
+
+
+    closeNav(e) {
+        console.log("id", e.detail)
+        var _mark_id = e.detail
+        arUtils.setNavRoute({ markID: _mark_id })
+
     },
 
 
