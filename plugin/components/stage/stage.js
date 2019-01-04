@@ -72,8 +72,8 @@ Component({
          * 结束点 
         */
         focus: {
-            type: Object,
-            value: {},
+            type: Array,
+            value: [],
             observer(newVal, oldVal) {
                 if (newVal)
                     this.setData({ //

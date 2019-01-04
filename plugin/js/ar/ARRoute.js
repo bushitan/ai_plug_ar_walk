@@ -34,7 +34,7 @@ class ARRoute extends ARBase {
     renderRoute() {
         if (routeUtils.isStart()) {
             if (GP.data.mode == MODE_MARK)
-                GP.setData({ mode: MODE_NAV})
+                this._setMode(MODE_NAV)
             var _gps = GP.data.GPSLocation
             var _step = routeUtils.getStep()
             var _step_location = _step.location
@@ -47,19 +47,23 @@ class ARRoute extends ARBase {
                 if (_next){
                     GP.setData({ step: _next})
                 } else{
-                    GP.setData({
-                        mode: MODE_MARK
-                    })
+                    this._setMode(MODE_MARK)
                 }
             }
         }
     }
 
+    _setMode(mode){
+        GP.setData({
+            mode: mode 
+        })
+    }
 
     /**
      * @method  关闭导航
      */
     closeRoute(){
+        this._setMode(MODE_MARK)
         routeUtils.close()
     }
 

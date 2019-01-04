@@ -132,7 +132,7 @@ Page({
     closeNav(e) {
         console.log("id", e.detail)
         var _mark_id = e.detail
-        arUtils.setNavRoute({ markID: _mark_id })
+        arUtils.closeRoute()
 
     },
 

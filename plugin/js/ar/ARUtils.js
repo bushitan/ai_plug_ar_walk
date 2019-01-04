@@ -49,11 +49,16 @@ class ARUtils extends ARRoute  {
         var _list = GP.data.pointList
         var _mark = Utils.getMark(_list, _mark_id)
         var _gps = GP.data.GPSLocation
-        console.log(_mark, _gps)
+        console.log("setNavRoute",_mark, _gps)
         apiUtils.getRoute({
             fromStr: _gps.latitue + "," + _gps.longitude,
             toStr: _mark.latitue + "," + _mark.longitude,
             callback: this._navRouteCallback,
+        })
+
+        //设置终点
+        GP.setData({
+            focus: [ _mark ]
         })
     }
 
@@ -65,7 +70,7 @@ class ARUtils extends ARRoute  {
         _route = that.locationUtils.formatRoute({
             route: _route
         })
-        console.log(this,"this")
+        console.log("this", _route)
         that.startRoute({ route: _route})
     }
 }
