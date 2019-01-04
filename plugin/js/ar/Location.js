@@ -4,18 +4,16 @@
  * @method  地理位置基础类
  */
 class Location {
-    constructor(options) {
-        if (!options.hasOwnProperty("latitue")) { throw Error('latitue值不能为空'); }
-        if (!options.hasOwnProperty("longitude")) { throw Error('longitude值不能为空'); }
-        // latitue, longitude, name, style
+    constructor(options = {}) {
+        this.style = "location"
+        this.id = options.id
+        this.title = options.title
+        this.address = options.address
+        this.category = options.category
         this.latitue = options.latitue
         this.longitude = options.longitude
-        // return {
-        //     latitue: this.latitue,
-        //     longitude: this.longitude,
-        //     // name: options.name,
-        //     // style: options.style,
-        // }
+        this.distance = options.distance
+        this.compass_direction = options.compass_direction
     }
     getString(){
         return String(this.latitue) + "," + String(this.longitude)

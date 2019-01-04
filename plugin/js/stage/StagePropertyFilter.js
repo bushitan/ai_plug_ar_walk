@@ -14,7 +14,19 @@ var Utils = {
         var _list = []
         for (var i = 0; i < _org_list.length; i++) {
             var _m = _org_list[i]
-            var _sprite = new SpriteMark(_m) //创建mark精灵
+
+            // if (_m.style != "location") { throw Error('对象style不为location') }   
+
+            var _sprite = new SpriteMark({
+                id: _m.id,
+                title: _m.title,
+                // address: _m.address,
+                // category: _m.category,
+                latitue: _m.latitue,
+                longitude: _m.longitude,
+                distance: _m.distance,
+                compass_direction: _m.compass_direction, 
+            }) //创建mark精灵
             _list.push(_sprite)
         }
         return _list
@@ -73,7 +85,6 @@ class StagePropertyFilter extends StageBase{
         var _d = options.direction
         var _acc_z = options.acc_z
         _d = Utils.getDirectionShake(_d)
-        console.log()
         _d = Utils.getDirectionReverse(_d, _acc_z)
         return _d
     }

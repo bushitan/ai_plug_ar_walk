@@ -1,12 +1,59 @@
 
 var StagePropertyFilter = require("StagePropertyFilter.js")
 var SwitchUtils = require("SwitchUtils.js")
+var GP
 /**
  * @method  StagePropertyFilter过滤接口信息
  */
+var Utils = {
+    /**
+     * 获取mark的详细信息
+     */
+    getMarkInfo(markList,markID){
+        var _list = markList
+        var _info = {}
+        for (var i = 0; i < _list.length;i++){
+            if(_list[i].id == markID)
+                _info = {
+                    id:_list[i].id,
+                    title: _list[i].title,
+                    distance: _list[i].distance,
+                    address: _list[i].address,
+                    des: _list[i].category,
+                }
+        }
+        return _info
+    },
+}
 class StageClick extends StagePropertyFilter {
     constructor(options) {
         super(options)
+        if (!options.GP) { throw Error('GP值不能为空'); }
+        GP = options.GP
+    }
+    /**
+     * @method 打开mark详情
+     * 
+     * @param
+     *      {number} mark_id mark的ID
+     */
+    clickMark(options) {
+        var _mark_id = options.mark_id
+        var s = new SwitchUtils()
+        GP.setData({
+            markInfo: Utils.getMarkInfo(GP.data.list,_mark_id),
+            show: s.onInfo() ,
+        })
+    }
+
+    /**
+     * @method 关闭mark详情
+     */    
+    clickMarkInfoCancel() {
+        var s = new SwitchUtils()
+        GP.setData({
+            show: s.onMark(),
+        })
     }
 
 

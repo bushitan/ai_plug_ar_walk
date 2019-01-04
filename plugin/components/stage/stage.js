@@ -53,6 +53,7 @@ Component({
             type: String,
             value: MODE_MARK,
             observer(newVal, oldVal) {
+                // console.log(newVal,"modes")
                 if (newVal == MODE_MARK) //渲染mark
                     this.setData({ show: stageUtils.setModeMark()})                        
                 else
@@ -89,64 +90,54 @@ Component({
     },
     data: {
         markList: [], //mark数组
+        markInfo:{}, //标记点信息
         focusList:[], //终点数组
-        show: {},
-
-        keywordValue: "",
-
-
-        //基础数据
-        // GPSFrameFre: 70, //获取GPS坐标频率(按罗盘转动次数)
-        // GPSAccuray: 30, //GPS的精度
-        // GPSSpeed: 5,//移动速度
-        // GPSLocation: { latitue: 23.1290800000, longitude: 113.2643600000 },
-
-
-        //罗盘
-        // directionName: "东",
-        cameraHeight: 100,
-        //导航
-        // navDirection: 0,
-
+        show: {},//显示控制
+        cameraHeight: 100, //摄像头高度，可空出容纳map
         //标记
-        clickMarkID: 2,//点击mark的id
-        //菜单
-        // isPack: !false,
-        // clickMenuID: 0,
-        // menuList: [
-        //     { name: "全部", id: 0 },
-        //     { name: "景点", id: 1 },
-        //     { name: "厕所", id: 2 },
-        // ],
+        // clickMarkID: 2,//点击mark的id
 
     },
     ready() {
         GP = this
         stageUtils = new StageUtils({GP:this})
-        stageUtils.setModeMark()
+        this.setData({ show: stageUtils.setModeMark() })                 
     },
-    // attached: function(){
-    //     // 可以在这里发起网络请求获取插件的数据
-    //     // this.setData({
-    //     //     list: [{
-    //     //     name: '电视',
-    //     //     price: 1000
-    //     //     }, {
-    //     //     name: '电脑',
-    //     //     price: 4000
-    //     //     }, {
-    //     //     name: '手机',
-    //     //     price: 3000
-    //     //     }]
-    //     // })
-    // },
-    method:{
-        // render(options){
-        //     var _acc_z = options.acc_z
-        //     SpriteMark.render({
-        //         markList: this.data.markList, 
-        //         acc_z: _acc_z
-        //     })
-        // }
+
+    methods:{
+        /**
+         * @method 点击mark展示详情
+         * @for template/mark/mark.wxml
+         * @param
+         *      {object} e 事件对象
+         */
+        clickMark(e) {
+            var _mark_id = e.currentTarget.dataset.mark_id
+            console.log(GP.data.list)
+            stageUtils.clickMark({ mark_id: _mark_id})
+        
+        },
+
+        /**
+             * @method 关闭mark详情
+             * @for template/mark_info/mark_info.wxml
+             * @param
+             *      {object} e 事件对象
+             */
+        clickMarkInfoCancel(e) {
+            stageUtils.clickMarkInfoCancel()
+        },
+
+
+        /**
+          * @method 开启导航
+          * @for template/mark_info/mark_info.wxml
+          * @param
+          *      {object} e 事件对象
+          */
+        clickMarkInfoToNav(e) {
+            var _mark_id = e.currentTarget.dataset.mark_id
+            this.triggerEvent('startNav', _mark_id);
+        },
     },
 })

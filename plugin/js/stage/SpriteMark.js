@@ -14,14 +14,13 @@ var Sprite = require("Sprite.js")
 class SpriteMark extends Sprite {
     constructor(options = {}) {
         super(options)
-        this.id = 1
-        this.x = 150
-        this.y = 150
-        this.name = "水浒人家"
-        this.distance = 500
-        this.latitude = 24.4972341880
-        this.longitude = 108.6384236813
-        this.angle = 0
+        this.id = options.id || -1
+        this.name = options.name || "名字"
+        this.title = options.title || "标题"
+        this.latitude = options.latitude || 24.4972341880
+        this.longitude = options.longitude || 108.6384236813
+        this.distance = options.distance || 500
+        this.compass_direction = options.compass_direction || 0
     }
 
     /**

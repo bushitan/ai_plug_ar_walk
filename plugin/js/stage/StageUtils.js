@@ -22,6 +22,7 @@ class StageUtils extends StageClick {
      * 渲染mark状态
      */
     rendMark(options) {
+       
         var _mark_list = markUtils.render(options)
         GP.setData({
             markList: _mark_list
@@ -33,7 +34,7 @@ class StageUtils extends StageClick {
      */
     rendNav(options) {
         var _nav = navUtils.render(options)
-        console.log(_nav)
+        // console.log(_nav)
         GP.setData({
             nav: _nav
         })

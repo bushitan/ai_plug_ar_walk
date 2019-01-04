@@ -9,8 +9,8 @@ class Sprite {
         // console.log("options.x")
         // console.log(options.x)
         // console.log(options.x || 0)
-        this.x = options.x || 0
-        this.y = options.y || 0
+        this.x = options.x || 10
+        this.y = options.y || 10
         this.width = options.width || 32
         this.height = options.height || 32
         this.icon = options.icon || ""

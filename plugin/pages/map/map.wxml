@@ -3,12 +3,14 @@
 <!-- <camera>
 </camera> -->
 
+    <!-- mode="nav" -->
 <stage
     list="{{pointList}}"
     direction="{{direction}}"
     acc_z="{{accZ}}"
-    mode="nav"
+    mode="mark"
     focus="{{focusList}}"
     navInfo="{{navInfo}}"
+    catch:startNav="startNav"
 >
 </stage>

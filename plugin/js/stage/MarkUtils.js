@@ -27,6 +27,7 @@ class MarkUtils {
         //     acc_z: this.acc_z
         // })
         var _mark_list = GP.data.markList
+        // console.log(_mark_list)
         _mark_list = this._move(_mark_list)
         
         return _mark_list

@@ -24,7 +24,7 @@
 
     <template is="mark" data="{{markList}}" wx:if="{{show.mark}}"/>
 
-    <template is="mark_info" data="{{markList}}"  wx:if="{{show.markInfo}}"/>
+    <template is="mark_info" data="{{markInfo}}"  wx:if="{{show.markInfo}}"/>
 
     
     <template is="map_icon" wx:if="{{show.mapIcon}}" />

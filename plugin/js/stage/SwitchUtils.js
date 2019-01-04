@@ -47,6 +47,8 @@ class SwitchUtils  {
      * 打开信息
      */
     onInfo() {
+        this.menu = true
+        this.mark = true
         this.markInfo = true
         return this._get()
     }

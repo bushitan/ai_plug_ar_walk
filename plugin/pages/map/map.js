@@ -27,12 +27,11 @@ Page({
             address: '广东省广州市越秀区温泉西路二巷13号',
             tel: 13926116396,		
             category:'酒店宾馆: 经济型酒店',		
-            type	: 0,		
-            location:{		
-                lat	: 23.12908,		
-                lng	: 113.264359,
-            },
+            type	: 0,	
+            latitude	: 23.12908,		
+            longitude	: 113.264359,
             distance: 0,   
+            compass_direction:10,
         }],
 
         //导航部分
@@ -53,7 +52,7 @@ Page({
             GP.setData({
                 direction:parseInt(Math.random() * 300)
             })
-            
+            arUtils.checkNav()
         },1000)
 
         GP.turnOn()
@@ -90,12 +89,14 @@ Page({
         wx.getLocation({
             type: 'gcj02',
             success(res) {
-                GP.setData({
-                    GPSLocation: { latitue: res.latitude, longitude: res.longitude} ,
-                    GPSAccuracy: res.accuracy,
-                    GPSSpeed: res.speed,
-                })
+                // GP.setData({
+                //     GPSLocation: { latitue: res.latitude, longitude: res.longitude} ,
+                //     GPSAccuracy: res.accuracy,
+                //     GPSSpeed: res.speed,
+                // })
 
+                //TODO 进入 
+                // arUtils.checkNav()
             }
         })
     },
@@ -116,6 +117,19 @@ Page({
         }
 
     },
+
+
+    startNav(e){
+        console.log("id",e.detail)
+        var _mark_id = e.detail
+        arUtils.setNavRoute({markID:_mark_id})
+        
+    },
+
+
+
+
+
 
     /**
      * 生命周期函数--监听页面隐藏

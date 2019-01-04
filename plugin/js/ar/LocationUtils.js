@@ -122,7 +122,92 @@ class LocationUtils {
         return value
     }
 
+    /**
+     * @methon 把request获取的mark格式化
+     * 
+     */
+    formatSearch(options) {
+        if (!options.hasOwnProperty("list")) { throw Error('list值不能为空'); }
+        if (!options.hasOwnProperty("location")) { throw Error('location值不能为空'); }
+
+        var _r = []
+        var _list = options.list
+        var _gps_location = options.location
+
+        for(var i=0;i<_list.length ; i++){
+            var _node = _list[i]
+
+            //将mark点变为location格式
+            var _mark_location = new Location({
+                latitue: _node.location.lat,
+                longitude: _node.location.lng,
+            })
+
+            //计算手机与目标点的距离
+            var _distance = this.getDistanceAB({
+                locationA: _gps_location,
+                locationB: _mark_location,
+            })
+            //计算手机与目标点连线的罗盘角度
+            var _compass_direction = this.getCompassDirectionSelfToFocus({
+                locationSelf: _gps_location,
+                locationFocus: _mark_location,
+            })
+
+            //生成实际的数组
+            var _temp = new Location({
+                id: _node.id,
+                title: _node.title,
+                address: _node.address,
+                category: _node.category,
+                latitue: _node.location.lat,
+                longitude: _node.location.lng,
+                distance: _distance,
+                compass_direction: _compass_direction,
+            })
+            _r.push(_temp)
+        }
+        return _r
+    }
+
+    formatRoute(options){
+        if (!options.hasOwnProperty("route")) { throw Error('location值不能为空'); }
+        var _route = options.route
+        _route = Utils.filterLocation(_route)
+        return _route
+    }
 }
 
+
+
+var Utils = {
+    /**
+     * 对腾讯地图导航坐标解压
+     * 
+     * @param {Object} 未解压routes参数
+     */
+    filterLocation(routes) {
+        var coors = routes.polyline, pl = [];
+        var steps = routes.steps
+        console.log(steps)
+
+        //坐标解压（返回的点串坐标，通过前向差分进行压缩）
+        var kr = 1000000;
+        for (var i = 2; i < coors.length; i++) {
+            coors[i] = Number(coors[i - 2]) + Number(coors[i]) / kr;
+        }
+
+        for (var i = 0; i < steps.length; i++) {
+            var location = new Location({
+                latitue:coors[steps[i].polyline_idx[0]],
+                longitude:coors[steps[i].polyline_idx[1]]
+            })
+            steps[i].location = location
+        }
+        routes.steps = steps
+        return routes
+    },
+
+}
 
 module.exports = LocationUtils
