@@ -12,7 +12,10 @@
     step="{{step}}"
     focus="{{focusList}}"
     navInfo="{{navInfo}}"
+    gps="{{GPSLocation}}"
+    polyline="{{polyline}}"
     catch:startNav="startNav"
     catch:closeNav="closeNav"
 >
 </stage>
+

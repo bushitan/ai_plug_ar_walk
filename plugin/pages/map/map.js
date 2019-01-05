@@ -19,7 +19,7 @@ Page({
         isSearch:true,
         pointList:[],
         direction:0, //罗盘方向
-        accZ:0.4, //手机俯仰姿势
+        accZ:0.2, //手机俯仰姿势
 
         focusList:[{
             id: 14573289671493206044,                
@@ -41,7 +41,9 @@ Page({
             dialog: "100向右拐",
         },
 
-        mode:"mark"
+        mode:"mark",
+        polyline:[],// 导航路径
+
     },
 
     /**

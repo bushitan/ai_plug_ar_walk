@@ -58,6 +58,7 @@ var Utils = {
     },
 
 
+
 }
 class StagePropertyFilter extends StageBase{
     constructor(options) {
@@ -93,12 +94,106 @@ class StagePropertyFilter extends StageBase{
     * @method 过滤nav导航数组
     */
     filterNavList(options = {}) {
-        if (!options.list) { throw Error('list值不能为空') }
+        if (!options.hasOwnProperty('list')) { throw Error('list值不能为空') }
         var _list = options.list
         var _list = Utils.getMarkList(_list)
         return _list
     }
 
 
+    /**
+    * @method 过滤地图路径
+    */
+    filterMapPolyline(options = {}) {
+        if (!options.hasOwnProperty('polyline')) { throw Error('polyline值不能为空') }
+        var _polyline = options.polyline
+        console.log(_polyline,"poliline")
+        // _polyline = [23.128729, 113.264359, 23.128729, 113.264259, 23.128729, 113.264259]
+
+        var _points = []
+        for (var i = 0; i < _polyline.length;i=i+2){
+            _points.push({
+                latitude: _polyline[i],
+                longitude: _polyline[i+1],
+            })
+        }
+
+        var _latitude = _polyline[0]
+        var _longitude = _polyline[1]
+        var _polyline_list = [{
+            points: _points,
+            color:"#FF0000DD",
+            width:5,
+            borderWidth:3,
+        }]
+
+        return {
+            latitude: _latitude,
+            longitude: _longitude,
+            polyline:_polyline_list,
+        }
+    }
+
+    /**
+     * @method 过滤地图路径
+    * @des 0 手机GPS / 1 起点  / 2 终点
+     */
+    filterMarkerInit(options = {}) {
+        if (!options.hasOwnProperty('start')) { throw Error('start值不能为空') }
+        if (!options.hasOwnProperty('end')) { throw Error('end值不能为空') }
+        var _start = options.start
+        var _end = options.end
+        var _icon_width = 32
+        var markers = [
+            {  //开始点
+                iconPath: '../../images/nav_icon_center.png', id: 0,
+                latitude: _start.latitude, longitude: _start.longitude,
+                width: _icon_width, height: _icon_width
+            },
+            {   //结束点
+                iconPath: '../../images/menu_address.png', id: 1,
+                latitude: _end.latitude, longitude: _end.longitude,
+                width: _icon_width, height: _icon_width
+            },
+            { //手机位置
+                iconPath: '../../images/map_hero.png', id: 2,
+                latitude: _start.latitude, longitude: _start.longitude,
+                width: _icon_width, height: _icon_width
+            },
+        ]
+
+        return markers
+    }
+
+    /**
+    * @method 过滤0手机在地图上的标注点  
+    */
+    filterMarkerGPS() {
+        if (!options.hasOwnProperty('markers')) { throw Error('markers值不能为空') }
+        if (!options.hasOwnProperty('gps')) { throw Error('gps值不能为空') }
+        var _markers = options.markers
+        var _gps = options.gps
+        _markers[2].latitude = _gps.latitude
+        _markers[2].longitude = _gps.longitude
+        return markers 
+        // for(var i=0;i<_markers.length;i++){
+        //     if (_markers[i].id == 2) {
+        //         _markers[i].latitude = _gps.latitude
+        //         _markers[i].longitude = _gps.longitude
+        //     }
+        // }  
+
+        // var markers = [{
+        //     iconPath: '../../images/menu_address.png',
+        //     id: 0,
+        //     latitude: _obj.latitude,
+        //     longitude: _obj.longitude,
+        //     width: 32,
+        //     height: 32
+        // }]
+        
+
+
+    }
 }
 module.exports = StagePropertyFilter

@@ -14,10 +14,14 @@ Component({
             type: Array,
             value: [],
             observer(newVal, oldVal) {
-                if(newVal)
+                if (newVal) {
                     this.setData({
                         markList: stageUtils.filterMarkList({ list: newVal })
                     })
+                    console.log(newVal)
+                    console.log(GP.data.markList)
+
+                }
             }
         },
         
@@ -87,6 +91,36 @@ Component({
             value: {},
         },
 
+        polyline: {
+            type: Object,
+            value: {},
+            observer(newVal, oldVal) {
+                var _map = stageUtils.filterMapPolyline({ polyline: newVal })
+                var _markers = stageUtils.filterMarkerInit({
+                    start: { latitude: newVal[0], longitude: newVal[1]},
+                    end: { latitude: newVal[newVal.length - 2], longitude: newVal[newVal.length - 1]},
+                })
+
+                this.setData({
+                    map: _map,
+                    markers: _markers
+                })
+            }
+        },
+
+        // gps: {
+        //     type: Object,
+        //     value: {},
+        //     observer(newVal, oldVal) {
+        //         var _markers = stageUtils.filterMarkerGPS({ 
+        //             markers: this.data.markers,
+        //             gps: newVal 
+        //         })
+        //         this.setData({
+        //             markers: _markers
+        //         })
+        //     }
+        // },
     },
     data: {
         markList: [], //mark数组
@@ -94,6 +128,11 @@ Component({
         focusList:[], //终点数组
         show: {},//显示控制
         cameraHeight: 100, //摄像头高度，可空出容纳map
+
+        map:{}, //地图数据
+        markers: [],
+
+        // polylineObj:[], //导航路径
         //标记
         // clickMarkID: 2,//点击mark的id
 
@@ -151,5 +190,25 @@ Component({
             stageUtils.clickNavCancel()
         },
         
+        /**
+        * @method 开启导航的地图
+        * @for template/map/map.wxml
+        * @param
+        *      {object} e 事件对象
+        */
+        clickNavAndMap(e) {
+            // var mark_id = e.currentTarget.dataset.mark_id
+            stageUtils.clickNavAndMap()
+        },
+
+        /**
+          * @method 关闭导航的地图
+          * @for template/map/map.wxml
+          * @param
+          *      {object} e 事件对象
+          */
+        clickNavMapOff(e) {
+            stageUtils.clickNavMapOff()
+        },
     },
 })

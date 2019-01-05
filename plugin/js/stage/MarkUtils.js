@@ -7,6 +7,9 @@ const DIRECTION_RIGHT = "right" //右方向
 const DIRECTION_FRONT = "front" //正前方
 const DIRECTION_BACK = "back" //后方 
 
+var leftNum = 0
+var rightNum = 0
+
 /**
  * @method  开关对象对象
  */
@@ -22,28 +25,37 @@ class MarkUtils {
     render() {
         var _direction = GP.data.direction //acc_z做为属性
         var _acc_z = GP.data.acc_z //acc_z做为属性
+        leftNum = 0
+        rightNum = 0
         //  var _mark_list = SpriteMark.render({
         //     markList: GP.data.markList,
         //     acc_z: this.acc_z
         // })
         var _mark_list = GP.data.markList
         // console.log(_mark_list)
-        _mark_list = this._move(_mark_list)
+        _mark_list = this._move(_mark_list, _direction, _acc_z)
         
         return _mark_list
     }
 
+    getNum(){
+        return {
+            leftNum: leftNum,
+            rightNum: rightNum,
+        }
+    }
+
     /**移动 */
-    _move(mark_list){
+    _move(mark_list, direction, acc_z){
         var _list = mark_list
-        var _d = GP.data.direction
-        var _acc_z = GP.data.acc_z
+        var _d = direction
+        var _acc_z = acc_z
         // console.log(_mark_list, _acc_z)
         for (var i = 0; i < _list.length; i++) {
             var _m = _list[i]
-            var _x = this._locationToScreen(10,20)
+            var _x = this._locationToScreen(direction, _list[i].compass_direction)
             _list[i].x = _x
-            _list[i].y = 800
+            _list[i].y = 500
         }
         return _list
     }
@@ -59,6 +71,7 @@ class MarkUtils {
         // var stepPixle = 750 / baseAngle
 
         var obj = this._compassBetweenAngle(phone_value, mark_value)
+        Utils.countNum(obj.value, obj.direction)
         // console.log(phone_value, mark_value,obj.value)
         var _value = obj.value
         if (_value > baseAngle)
@@ -105,7 +118,18 @@ class MarkUtils {
         }
         return { value: value, direction: direction }
     }
+}
 
-
+var Utils = {
+    countNum(value, direction) {
+        // console.log(obj)
+        var _value = value
+        var _direction = direction
+        if (_value > 30)
+            if (_direction == DIRECTION_LEFT)
+                leftNum++
+            else
+                rightNum++
+    },
 }
 module.exports = MarkUtils

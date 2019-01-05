@@ -68,6 +68,29 @@ class StageClick extends StagePropertyFilter {
     }
 
 
+    /**
+     * @method 打开地图
+     */
+    clickNavAndMap(){
+        var s = new SwitchUtils()
+        GP.setData({
+            show: s.onNavMap(),
+            cameraHeight:80,
+        })
+    }
+
+
+    /**
+     * @method 关闭地图
+     */
+    clickNavMapOff() {
+        var s = new SwitchUtils()
+        GP.setData({
+            show: s.onNav(),
+            cameraHeight:100,
+        })
+
+    }
 
 
 

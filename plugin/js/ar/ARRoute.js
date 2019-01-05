@@ -25,6 +25,9 @@ class ARRoute extends ARBase {
             start: true,
             route: _route
         })
+        GP.setData({
+            polyline:routeUtils.polyline,
+        })
     }
 
 

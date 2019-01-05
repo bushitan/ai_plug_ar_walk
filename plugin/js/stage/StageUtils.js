@@ -24,9 +24,13 @@ class StageUtils extends StageClick {
     rendMark(options) {
        
         var _mark_list = markUtils.render(options)
+        var _num = markUtils.getNum()
         GP.setData({
-            markList: _mark_list
+            markList: _mark_list,
+            leftNum: _num.leftNum,
+            rightNum:_num.rightNum,
         })
+        console.log(GP.data.leftNum, GP.data.rightNum)
     }
 
     /**
